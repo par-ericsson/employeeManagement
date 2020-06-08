@@ -25,47 +25,57 @@ namespace employeeManagement.Controllers
         public ActionResult Index()
         {
             var leavetypes = _repo.FindAll().ToList();
-            var model = _mapper.Map<List<LeaveType>, List<DetailsLeaveTypeViewModel>>(leavetypes);
+            var model = _mapper.Map<List<LeaveType>, List<LeaveTypeViewModel>>(leavetypes);
 
             return View(model);
         }
 
-        // GET: LeaveTypes/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: LeaveTypes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: LeaveTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(LeaveTypeViewModel model)
         {
-            try
+           try
             {
-                // TODO: Add insert logic here
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                var leaveType = _mapper.Map<LeaveType>(model);
+                leaveType.DateCreated = DateTime.Now;
+                var isSuccess = _repo.Create(leaveType);
+
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "Something went wrong...");
+                    return View(model);
+                }
 
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something went wrong...");
+                return View(model);
             }
+            
         }
 
-        // GET: LeaveTypes/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: LeaveTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -82,13 +92,12 @@ namespace employeeManagement.Controllers
             }
         }
 
-        // GET: LeaveTypes/Delete/5
+
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: LeaveTypes/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
