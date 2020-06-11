@@ -32,7 +32,14 @@ namespace employeeManagement.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            if(!_repo.isExists(id))
+            {
+                return NotFound();
+            }
+            var leavetype = _repo.FindById(id);
+            var model = _mapper.Map<LeaveTypeViewModel>(leavetype);
+
+            return View(model);
         }
 
         public ActionResult Create()
@@ -113,22 +120,38 @@ namespace employeeManagement.Controllers
 
         public ActionResult Delete(int id)
         {
-            return View();
+            if (!_repo.isExists(id))
+            {
+                return NotFound();
+            }
+            var leaveType = _repo.FindById(id);
+            var model = _mapper.Map<LeaveTypeViewModel>(leaveType);
+
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, LeaveTypeViewModel model)
         {
             try
             {
-                // TODO: Add delete logic here
+                var leavetype = _repo.FindById(id);
+                if(leavetype == null)
+                {
+                    return NotFound();
+                }
+                var isSuccess = _repo.Delete(leavetype);
+                if(!isSuccess)
+                {
+                    return View(model);
+                }
 
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(model);
             }
         }
     }
