@@ -20,8 +20,8 @@ namespace employeeManagement
             {
                 var user = new IdentityUser
                 {
-                    UserName = "admin",
-                    Email = "admin@localhost"
+                    UserName = "admin@localhost.com",
+                    Email = "admin@localhost.com"
                 };
 
                 var result = userManager.CreateAsync(user, "P@ssword1").Result;

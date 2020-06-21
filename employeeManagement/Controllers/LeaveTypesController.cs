@@ -6,11 +6,13 @@ using AutoMapper;
 using employeeManagement.Contracts;
 using employeeManagement.Data;
 using employeeManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace employeeManagement.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeRepository _repo;
