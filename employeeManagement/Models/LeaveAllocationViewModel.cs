@@ -12,10 +12,10 @@ namespace employeeManagement.Models
     {
         public int Id { get; set; }
 
-        [Required]
         public int NumberofDays { get; set; }
         public DateTime DateCreated { get; set; }
 
+        public int Period { get; set; }
         public EmployeeViewModel Employee { get; set; }
         public string EmployeeId { get; set; }
 
@@ -24,5 +24,11 @@ namespace employeeManagement.Models
 
         public IEnumerable<SelectListItem> Employees { get; set; }
         public IEnumerable<SelectListItem> LeaveTypes { get; set; }
+    }
+
+    public class CreateLeaveAllocationViewModel
+    {
+        public int NumberUpdated { get; set; }
+        public List<LeaveTypeViewModel> LeaveTypes { get; set; }
     }
 }
