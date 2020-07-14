@@ -22,13 +22,18 @@ namespace employeeManagement.Models
         public LeaveTypeViewModel LeaveType { get; set; }
         public int LeaveTypeId { get; set; }
 
-        public IEnumerable<SelectListItem> Employees { get; set; }
-        public IEnumerable<SelectListItem> LeaveTypes { get; set; }
     }
 
     public class CreateLeaveAllocationViewModel
     {
         public int NumberUpdated { get; set; }
         public List<LeaveTypeViewModel> LeaveTypes { get; set; }
+    }
+
+    public class ViewAllocationsViewMode
+    {
+        public EmployeeViewModel Employee { get; set; }
+        public string EmployeeId { get; set; }
+        public List<LeaveAllocationViewModel> LeaveAllocations { get; set; }
     }
 }
