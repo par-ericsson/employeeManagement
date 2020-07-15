@@ -18,6 +18,8 @@ namespace employeeManagement.Data
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
         public DbSet<employeeManagement.Models.LeaveTypeViewModel> DetailsLeaveTypeViewModel { get; set; }
         public DbSet<employeeManagement.Models.EmployeeViewModel> EmployeeViewModel { get; set; }
+        public DbSet<employeeManagement.Models.LeaveAllocationViewModel> LeaveAllocationViewModel { get; set; }
+        public DbSet<employeeManagement.Models.EditLeaveAllocationViewModel> EditLeaveAllocationViewModel { get; set; }
 
     }
 }
