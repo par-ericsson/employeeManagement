@@ -16,37 +16,37 @@ namespace employeeManagement.Repository
             _db = db;
         }
 
-        public bool Create(LeaveHistory entity)
+        public bool Create(LeaveRequest entity)
         {
-            _db.LeaveHistories.Add(entity);
+            _db.LeaveRequests.Add(entity);
 
             return Save();
         }
 
-        public bool Delete(LeaveHistory entity)
+        public bool Delete(LeaveRequest entity)
         {
-            _db.LeaveHistories.Remove(entity);
+            _db.LeaveRequests.Remove(entity);
 
             return Save();
         }
 
-        public ICollection<LeaveHistory> FindAll()
+        public ICollection<LeaveRequest> FindAll()
         {
-            var leaveHistories = _db.LeaveHistories.ToList();
+            var leaveHistories = _db.LeaveRequests.ToList();
 
             return leaveHistories;
         }
 
-        public LeaveHistory FindById(int id)
+        public LeaveRequest FindById(int id)
         {
-            var leaveHistory = _db.LeaveHistories.Find(id);
+            var leaveHistory = _db.LeaveRequests.Find(id);
 
             return leaveHistory;
         }
 
         public bool isExists(int id)
         {
-            var exists = _db.LeaveHistories.Any(q => q.Id == id);
+            var exists = _db.LeaveRequests.Any(q => q.Id == id);
             return exists;
         }
 
@@ -55,9 +55,9 @@ namespace employeeManagement.Repository
             return _db.SaveChanges() > 0;
         }
 
-        public bool Update(LeaveHistory entity)
+        public bool Update(LeaveRequest entity)
         {
-            _db.LeaveHistories.Update(entity);
+            _db.LeaveRequests.Update(entity);
 
             return Save();
         }

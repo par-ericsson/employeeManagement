@@ -13,13 +13,8 @@ namespace employeeManagement.Data
             : base(options)
         { }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<LeaveHistory> LeaveHistories { get; set; }
+        public DbSet<LeaveRequest> LeaveRequests { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
-        public DbSet<employeeManagement.Models.LeaveTypeViewModel> DetailsLeaveTypeViewModel { get; set; }
-        public DbSet<employeeManagement.Models.EmployeeViewModel> EmployeeViewModel { get; set; }
-        public DbSet<employeeManagement.Models.LeaveAllocationViewModel> LeaveAllocationViewModel { get; set; }
-        public DbSet<employeeManagement.Models.EditLeaveAllocationViewModel> EditLeaveAllocationViewModel { get; set; }
-
     }
 }
