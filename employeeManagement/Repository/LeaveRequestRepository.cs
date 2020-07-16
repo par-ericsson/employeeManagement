@@ -1,5 +1,6 @@
 ﻿using employeeManagement.Contracts;
 using employeeManagement.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace employeeManagement.Repository
 {
-    public class LeaveHistoryRepository : ILeaveHistoryRepository
+    public class LeaveRequestRepository : ILeaveRequestRepository
     {
         private readonly ApplicationDbContext _db;
 
-        public LeaveHistoryRepository(ApplicationDbContext db)
+        public LeaveRequestRepository(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -32,14 +33,22 @@ namespace employeeManagement.Repository
 
         public ICollection<LeaveRequest> FindAll()
         {
-            var leaveHistories = _db.LeaveRequests.ToList();
+            var leaveHistories = _db.LeaveRequests
+                .Include(q => q.RequestingEmployee)
+                .Include(q => q.ApprovedBy)
+                .Include(q => q.LeaveType)
+                .ToList();
 
             return leaveHistories;
         }
 
         public LeaveRequest FindById(int id)
         {
-            var leaveHistory = _db.LeaveRequests.Find(id);
+            var leaveHistory = _db.LeaveRequests
+                .Include(q => q.RequestingEmployee)
+                .Include(q => q.ApprovedBy)
+                .Include(q => q.LeaveType)
+                .FirstOrDefault(q => q.Id == id);
 
             return leaveHistory;
         }

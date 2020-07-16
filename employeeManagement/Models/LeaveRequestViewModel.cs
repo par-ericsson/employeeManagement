@@ -9,7 +9,7 @@ namespace employeeManagement.Models
     public class LeaveRequestViewModel
     {
         public int Id { get; set; }
-        
+
         public EmployeeViewModel RequestingEmployee { get; set; }
         public string RequestingEmployeeId { get; set; }
 
@@ -25,5 +25,15 @@ namespace employeeManagement.Models
 
         public EmployeeViewModel ApprovedBy { get; set; }
         public string ApprovedById { get; set; }
+    }
+
+
+    public class AdminLeaveRequestViewModel
+    {
+        public int TotalRequests { get; set; }
+        public int ApprovedRequests { get; set; }
+        public int PendingRequests  { get; set; }
+        public int RejectedRequests { get; set; }
+        public List<LeaveRequestViewModel> LeaveRequests { get; set; }
     }
 }
