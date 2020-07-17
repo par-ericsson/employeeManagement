@@ -18,12 +18,14 @@ namespace employeeManagement.Controllers
     public class LeaveRequestController : Controller
     {
         private readonly ILeaveRequestRepository _leaveRequestRepository;
+        private readonly ILeaveTypeRepository _leaveTypeRepository;
         private readonly IMapper _mapper;
         private readonly UserManager<Employee> _userManager;
 
-        public LeaveRequestController(ILeaveRequestRepository leaveRequestRepository, IMapper mapper, UserManager<Employee> userManager)
+        public LeaveRequestController(ILeaveRequestRepository leaveRequestRepository, ILeaveTypeRepository leaveTypeRepository ,IMapper mapper, UserManager<Employee> userManager)
         {
             _leaveRequestRepository = leaveRequestRepository;
+            _leaveTypeRepository = leaveTypeRepository;
             _mapper = mapper;
             _userManager = userManager;
         }
@@ -51,10 +53,20 @@ namespace employeeManagement.Controllers
             return View();
         }
 
-        // GET: LeaveRequestController1/Create
         public ActionResult Create()
         {
-            return View();
+            var leaveTypes = _leaveTypeRepository.FindAll();
+            var leaveTypeItems = leaveTypes.Select(q => new SelectListItem
+            {
+                Text = q.Name,
+                Value = q.Id.ToString()
+            });
+            var model = new CreateLeaveRequestViewModel
+            {
+                LeaveTypes = leaveTypeItems
+            };
+
+            return View(model);
         }
 
         // POST: LeaveRequestController1/Create
