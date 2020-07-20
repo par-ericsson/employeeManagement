@@ -73,4 +73,10 @@ namespace employeeManagement.Models
         [MaxLength(300)]
         public string RequestComments { get; set; }
     }
+
+    public class EmployeeLeaveRequestViewModel
+    {
+        public List<LeaveAllocationViewModel> LeaveAllocations { get; set; }
+        public List<LeaveRequestViewModel> LeaveRequests { get; set; }
+    }
 }
