@@ -11,10 +11,8 @@
 <table class="table">
     <thead>
         <tr>        
-            <th>
-                Leave Types
-            </th>
-            <th></th>
+            <th>Leave Types</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -25,7 +23,7 @@
             </td>
             <td>
                 <a class="btn btn-outline-success" asp-action="SetLeave" asp-route-id="@item.Id">
-                    <i fa fa-pencil></i> Allocate To Employees
+                    <i fas fa-user-edit></i> Allocate To Employees
                 </a>
             </td>
         </tr>
